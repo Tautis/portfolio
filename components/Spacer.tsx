@@ -1,3 +1,4 @@
+"use client";
 import clsx from "clsx";
 
 type Size = "4" | "8" | "12" | "16" | "20" | "24" | "32" | "40" | "80";

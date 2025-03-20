@@ -1,3 +1,4 @@
+"use client";
 import { useCursorContext } from "@/context/CursorContext";
 import type { SVGProps } from "react";
 

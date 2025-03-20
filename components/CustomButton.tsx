@@ -1,3 +1,4 @@
+"use client";
 import useScrollDirections from "../hooks/useScrollDirections";
 
 export enum ButtonColor {
