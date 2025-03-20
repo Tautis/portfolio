@@ -4,28 +4,27 @@ import { gsap } from "gsap";
 import MorphingText from "./MorphingText";
 
 const LoadCover: React.FC = () => {
-  const useDisableScroll = (disable: boolean) => {
-    if (disable) {
-      console.log("called");
-      document.documentElement.style.overflow = "hidden";
-      document.documentElement.style.height = "100vh";
-      document.documentElement.style.width = "100vw";
-
-      document.body.style.overflow = "hidden";
-      document.body.style.height = "100vh";
-      document.body.style.width = "100vw";
-    } else {
-      document.documentElement.style.overflow = "";
-      document.documentElement.style.height = "";
-      document.documentElement.style.width = "";
-
-      document.body.style.overflow = "";
-      document.body.style.height = "";
-      document.body.style.width = "";
-    }
-  };
-
   useEffect(() => {
+    const useDisableScroll = (disable: boolean) => {
+      if (disable) {
+        console.log("called");
+        document.documentElement.style.overflow = "hidden";
+        document.documentElement.style.height = "100vh";
+        document.documentElement.style.width = "100vw";
+
+        document.body.style.overflow = "hidden";
+        document.body.style.height = "100vh";
+        document.body.style.width = "100vw";
+      } else {
+        document.documentElement.style.overflow = "";
+        document.documentElement.style.height = "";
+        document.documentElement.style.width = "";
+
+        document.body.style.overflow = "";
+        document.body.style.height = "";
+        document.body.style.width = "";
+      }
+    };
     useDisableScroll(true);
 
     const timeline = gsap.timeline();
