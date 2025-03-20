@@ -7,7 +7,6 @@ const LoadCover: React.FC = () => {
   useEffect(() => {
     const useDisableScroll = (disable: boolean) => {
       if (disable) {
-        console.log("called");
         document.documentElement.style.overflow = "hidden";
         document.documentElement.style.height = "100vh";
         document.documentElement.style.width = "100vw";

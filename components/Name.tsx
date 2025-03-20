@@ -4,16 +4,15 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lottie from "lottie-react";
 import animationData2 from "../public/lottie2.json";
-gsap.registerPlugin(ScrollTrigger);
 
 const Name: React.FC = () => {
   const lottieRef = useRef(null);
   const [animationState, setAnimationState] = useState(0);
-  console.log("Rendering MyComponent");
   const style = {
     overflow: "hidden",
   };
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     const delayTime = 2.4;
     const ctx = gsap.context(() => {
       gsap.to("svg", { visibility: "visible", duration: 0, delay: delayTime });
