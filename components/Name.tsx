@@ -12,52 +12,65 @@ const Name: React.FC = () => {
     overflow: "hidden",
   };
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const delayTime = 2.4;
-    const ctx = gsap.context(() => {
-      gsap.to("svg", { visibility: "visible", duration: 0, delay: delayTime });
-      const rects = document.querySelectorAll<SVGRectElement>(
-        ".absolute.top-4 rect"
-      );
+    if (typeof window !== "undefined") {
+      import("gsap").then((gsapModule) => {
+        const gsap = gsapModule.default;
+        import("gsap/ScrollTrigger").then((ScrollTriggerModule) => {
+          const ScrollTrigger = ScrollTriggerModule.default;
+          gsap.registerPlugin(ScrollTrigger);
 
-      rects.forEach((rect, index) => {
-        gsap.set(rect, {
-          clipPath: "inset(0% 0 0 0)",
-          delay: delayTime,
-        });
-        gsap.to(rect, {
-          clipPath: "inset(100% 0 0 0)",
-          duration: 5,
-          delay: delayTime + index * 0.03,
-          ease: "power4.out",
-        });
-      });
+          const delayTime = 2.4;
+          const ctx = gsap.context(() => {
+            gsap.to("svg", {
+              visibility: "visible",
+              duration: 0,
+              delay: delayTime,
+            });
+            const rects = document.querySelectorAll<SVGRectElement>(
+              ".absolute.top-4 rect"
+            );
 
-      gsap.to(".svg-wraper", {
-        scale: 130,
-        xPercent: -100,
-        onStart: () => setAnimationState(1),
-        onUpdate: function () {
-          if (this.progress() === 0) {
-            setAnimationState(0);
+            rects.forEach((rect, index) => {
+              gsap.set(rect, {
+                clipPath: "inset(0% 0 0 0)",
+                delay: delayTime,
+              });
+              gsap.to(rect, {
+                clipPath: "inset(100% 0 0 0)",
+                duration: 5,
+                delay: delayTime + index * 0.03,
+                ease: "power4.out",
+              });
+            });
+
+            gsap.to(".svg-wraper", {
+              scale: 130,
+              xPercent: -100,
+              onStart: () => setAnimationState(1),
+              onUpdate: function () {
+                if (this.progress() === 0) {
+                  setAnimationState(0);
+                  gsap.set(".svg-wraper", { clearProps: "all" });
+                }
+              },
+              scrollTrigger: {
+                trigger: ".scroll-section",
+                start: "+=1",
+                end: "+=600",
+                scrub: 1,
+              },
+              delay: delayTime,
+            });
+          });
+
+          return () => {
+            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+            ctx.revert();
             gsap.set(".svg-wraper", { clearProps: "all" });
-          }
-        },
-        scrollTrigger: {
-          trigger: ".scroll-section",
-          start: "+=1",
-          end: "+=600",
-          scrub: 1,
-        },
-        delay: delayTime,
+          };
+        });
       });
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      ctx.revert();
-      gsap.set(".svg-wraper", { clearProps: "all" });
-    };
+    }
   }, []);
 
   return (
