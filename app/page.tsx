@@ -1,12 +1,11 @@
 "use client";
-import Name from "@/components/Name";
 import Cursor from "@/components/Cursor";
 import Navbar from "@/components/Navbar";
 import CircleText from "@/components/CircleText";
 import { CursorProvider } from "@/context/CursorContext";
 import { useEffect, useRef, useState } from "react";
 import Lenis from "lenis";
-
+import dynamic from "next/dynamic";
 import { Spacer } from "@/components/Spacer";
 
 import { projects } from "../public/data.js";
@@ -17,7 +16,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
 import AboutText from "@/components/AboutText";
 import Contact from "@/components/Contact";
-
+const Name = dynamic(() => import("../components/Name"), { ssr: false });
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
