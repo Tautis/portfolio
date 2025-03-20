@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import CustomButton, { ButtonColor, ButtonSize } from "./CustomButton";
 import SmokeEffect from "@/components/WebGLCanvas";
