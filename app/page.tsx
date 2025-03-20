@@ -89,9 +89,9 @@ export default function Home() {
   return (
     <main ref={container} className="containerGrainy scroll-smooth">
       {" "}
-      {/* <CursorProvider>
+      <CursorProvider>
         <Cursor />
-        <LoadCover />
+        {/* <LoadCover /> */}
         <Navbar
           scrollToSection={scrollToSection}
           projectsSection={projectsSection}
@@ -130,7 +130,7 @@ export default function Home() {
           </div>
         </div>
         <Contact contactSection={contactSection} />
-      </CursorProvider> */}
+      </CursorProvider>
     </main>
   );
 }
