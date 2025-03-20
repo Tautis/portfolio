@@ -1,101 +1,136 @@
-import Image from "next/image";
+"use client";
+import Name from "@/components/Name";
+import Cursor from "@/components/Cursor";
+import Navbar from "@/components/Navbar";
+import CircleText from "@/components/CircleText";
+import { CursorProvider } from "@/context/CursorContext";
+import { useEffect, useRef, useState } from "react";
+import Lenis from "lenis";
+
+import { Spacer } from "@/components/Spacer";
+
+import { projects } from "../public/data.js";
+import Card from "@/components/cards";
+import { useScroll } from "framer-motion";
+import LoadCover from "@/components/LoadCover";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "gsap";
+import AboutText from "@/components/AboutText";
+import Contact from "@/components/Contact";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [isFirstAnimationComplete, setFirstAnimationComplete] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const projectsSection = useRef(null);
+  const aboutSection = useRef(null);
+  const contactSection = useRef(null);
+
+  const scrollToSection = (section: React.RefObject<HTMLElement>) => {
+    if (section.current) {
+      section.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const container = useRef(null);
+  const textRef = useRef(null);
+  const textBlockRef = useRef(null);
+
+  const handleFirstAnimationComplete = () => {
+    setFirstAnimationComplete(true);
+  };
+
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
+    const lenis = new Lenis();
+    function raf(time: any) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    let ctx = gsap.matchMedia(); // Create matchMedia context
+
+    ctx.add("(max-width: 768px)", () => {
+      // This will only run on screens 768px or smaller (mobile)
+      gsap.fromTo(
+        textRef.current,
+        { rotate: "0deg", x: 0, transformOrigin: "left top" }, // Start horizontal
+        {
+          rotate: "90deg", // Rotate to vertical on scroll
+          x: 0, // Keep it at left-0
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: textRef.current,
+            start: "top bottom-=200",
+            end: "top center",
+            scrub: true,
+          },
+        }
+      );
+    });
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  return (
+    <main ref={container} className="containerGrainy scroll-smooth">
+      {" "}
+      <CursorProvider>
+        <Cursor />
+        <LoadCover />
+        <Navbar
+          scrollToSection={scrollToSection}
+          projectsSection={projectsSection}
+          aboutSection={aboutSection}
+          contactSection={contactSection}
+        />
+        <CircleText />
+        <Name />
+        <div className="z-[99998] relative bg-[#111111]">
+          <div className="bg-black-500/40 grid mx-auto">
+            <Spacer size="80" />
+            <AboutText aboutSection={aboutSection} />
+            <div className="" ref={projectsSection}>
+              <p
+                ref={textRef}
+                className="lg:[writing-mode:vertical-lr] inline-block sticky left-0 top-96 tracking-[.5rem] ml-10 mb-0 text-white"
+              >
+                RECENT WORK
+              </p>
+
+              {projects.map((project, i) => {
+                const targetScale = 1 - (projects.length - i) * 0.05;
+                return (
+                  <Card
+                    key={i}
+                    i={i}
+                    {...project}
+                    range={[i * 0.25, 1]}
+                    targetScale={targetScale}
+                    progress={scrollYProgress}
+                  />
+                );
+              })}
+            </div>
+            <Spacer size="80" />
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <Contact contactSection={contactSection} />
+      </CursorProvider>
+    </main>
   );
 }

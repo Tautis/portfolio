@@ -2,26 +2,166 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Mulish";
+  src: url("/Mulish.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Delirium";
+  src: url("/Delirium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
-  --background: #ffffff;
+  --background: #111111;
   --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #111111;
     --foreground: #ededed;
   }
 }
-
+body::-webkit-scrollbar {
+  width: 8px;
+}
+body::-webkit-scrollbar-thumb {
+  background: #313131;
+}
+body::-webkit-scrollbar-track {
+  background: #000;
+  width: 1px;
+  height: 1px;
+}
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Mulish";
 }
-
+canvas {
+  background-color: rgb(153, 186, 241); /* Same color as gl.clearColor */
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.containerGrainy {
+  user-select: none;
+  /* overflow-x: hidden; */
+}
+.masked-video {
+  mask: url(#mask);
+  -webkit-mask: url(#mask);
+  width: 100%;
+  height: 100vh;
+}
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.willchange {
+  will-change: transform;
+}
+.svg-wraper {
+  will-change: transform;
+  transform: translateZ(0);
+  transform-style: preserve-3d;
+  transform: translate3d(0, 0, 0);
+}
+.lottie-container {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+.scroll-section {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+.clip-content {
+  clip-path: inset(0 0 0 0);
+  height: 1000px;
+}
+.containerGrainy::before {
+  z-index: 9999999;
+  position: fixed;
+  content: "";
+  height: 300%;
+  width: 300%;
+  top: -100%;
+  left: -50%;
+  pointer-events: none; /* Ensure the noise background doesn't interfere with mouse events */
+  user-select: none;
+  background-image: url("http://momentsingraphics.de/Media/BlueNoise/WhiteNoiseDithering.png");
+  opacity: 0.029;
+  animation: noise 8s steps(10) infinite;
+}
+
+.group:hover .logo-path {
+  stroke: rgb(161, 196, 253);
+  stroke-dashoffset: 0;
+  fill: transparent;
+}
+
+.logo-path {
+  transition: stroke 0.5s ease-in-out, fill 2s ease-in-out,
+    stroke-dashoffset 2s ease-in-out;
+}
+
+.containerGrainy a,
+.containerGrainy button,
+.containerGrainy input,
+.containerGrainy textarea,
+.containerGrainy select,
+.containerGrainy [role="button"] {
+  pointer-events: auto; /* Allow pointer events for all interactive elements */
+}
+
+@keyframes noise {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, 5%);
+  }
+  30% {
+    transform: translate(7%, -25%);
+  }
+  40% {
+    transform: translate(-5%, 25%);
+  }
+  50% {
+    transform: translate(-15%, 10%);
+  }
+  60% {
+    transform: translate(15%, 0%);
+  }
+  70% {
+    transform: translate(0%, 15%);
+  }
+  80% {
+    transform: translate(3%, 35%);
+  }
+  90% {
+    transform: translate(-10%, 10%);
+  }
+}
+
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
 }
