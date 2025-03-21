@@ -22,7 +22,7 @@ const AboutText: React.FC<AboutTextProps> = ({ aboutSection }) => {
       gsap.to(chars, {
         y: 0,
         opacity: 1,
-        stagger: 0.07,
+        stagger: 0.005,
         ease: "power3.out",
         scrollTrigger: {
           trigger: textBlockRef.current,

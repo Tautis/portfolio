@@ -10,20 +10,22 @@ const Name: React.FC = () => {
   const style = {
     overflow: "hidden",
   };
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const rectRefs = useRef<(SVGRectElement | null)[]>([]);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     const delayTime = 2.4;
+
     const ctx = gsap.context(() => {
       gsap.to("svg", {
         visibility: "visible",
         duration: 0,
         delay: delayTime,
       });
-      const rects = document.querySelectorAll<SVGRectElement>(
-        ".absolute.top-4 rect"
-      );
 
-      rects.forEach((rect, index) => {
+      rectRefs.current.forEach((rect, index) => {
+        if (!rect) return; // Ensure ref is valid
         gsap.set(rect, {
           clipPath: "inset(0% 0 0 0)",
           delay: delayTime,
@@ -105,139 +107,21 @@ const Name: React.FC = () => {
             </svg>
 
             <svg className="absolute top-4" fill="#111" viewBox="0 0 1800 630">
-              <rect
-                x="100.2"
-                y="50"
-                width="72.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="179"
-                y="50"
-                width="72.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="260.2"
-                y="50"
-                width="72.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="340.2"
-                y="50"
-                width="72.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="420.2"
-                y="50"
-                width="75.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="502.2"
-                y="50"
-                width="75.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="585.2"
-                y="50"
-                width="75.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="670.2"
-                y="50"
-                width="75.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="750.2"
-                y="50"
-                width="70.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="862.2"
-                y="50"
-                width="75.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="949.2"
-                y="50"
-                width="75.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="1030.2"
-                y="50"
-                width="75.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="1120.2"
-                y="50"
-                width="75.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="1200.2"
-                y="50"
-                width="75.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="1281.2"
-                y="50"
-                width="80.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="1365.2"
-                y="50"
-                width="80.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="1450.2"
-                y="50"
-                width="75.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="1530.2"
-                y="50"
-                width="80.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
-              <rect
-                x="1610.2"
-                y="50"
-                width="80.1"
-                height="500.4"
-                fill="#111"
-              ></rect>
+              {[
+                100.2, 179, 260.2, 340.2, 420.2, 502.2, 585.2, 670.2, 750.2,
+                862.2, 949.2, 1030.2, 1120.2, 1200.2, 1281.2, 1365.2, 1450.2,
+                1530.2, 1610.2,
+              ].map((x, i) => (
+                <rect
+                  key={i}
+                  ref={(el) => (rectRefs.current[i] = el)}
+                  x={x}
+                  y="50"
+                  width={i % 2 === 0 ? "75.1" : "80.1"} // Alternating widths
+                  height="500.4"
+                  fill="#111"
+                />
+              ))}
             </svg>
           </div>
           <div className="fixed lg:top-[-23%] w-[99%] left-1/2 inset-1 -translate-x-1/2 z-0 flex justify-center lg:scale-y-[60%] scale-y-[70%] scale-x-[130%] lg:scale-x-100 ">
