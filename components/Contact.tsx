@@ -62,7 +62,7 @@ const Contact: React.FC<Props> = ({ contactSection }) => {
   }
   return (
     <div
-      className="relative z-[999] flex flex-col items-center justify-center lg:h-[100vh] h-[50vh] bg-[#111111]"
+      className="relative z-[999] flex flex-col items-center justify-center h-[100vh]  bg-[#111111]"
       onMouseEnter={() => setIsOverContact(true)}
       onMouseLeave={() => setIsOverContact(false)}
     >
@@ -74,7 +74,7 @@ const Contact: React.FC<Props> = ({ contactSection }) => {
           INTERESTED IN{"\n"}WORKING{"\n"}TOGETHER?
         </h1>
       </div>
-      <div className="z-10 absolute bottom-40">
+      <div className="z-10 absolute lg:bottom-40 bottom-64">
         <a href="mailto:tautvydas.jankauskas123@gmail.com?subject=Hello There!">
           <CustomButton
             text="DROP ME AN EMAIL !"
