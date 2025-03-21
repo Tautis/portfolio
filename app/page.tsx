@@ -98,9 +98,6 @@ export default function Home() {
           contactSection={contactSection}
         />
         <CircleText />
-        <Suspense fallback={<div className="h-[200vh] ">Loading...</div>}>
-          <Name />
-        </Suspense>
 
         <div className="z-[99998] relative bg-[#111111]">
           <div className="bg-black-500/40 grid mx-auto">
