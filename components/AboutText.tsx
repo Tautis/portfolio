@@ -2,6 +2,9 @@
 import { useEffect, useRef } from "react";
 import { Spacer } from "./Spacer";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface AboutTextProps {
   aboutSection: React.RefObject<HTMLDivElement>;
@@ -11,21 +14,23 @@ const AboutText: React.FC<AboutTextProps> = ({ aboutSection }) => {
   const textBlockRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (aboutSection.current) {
-      const chars = aboutSection.current.querySelectorAll(".char");
-
+    if (typeof window !== "undefined" && textBlockRef.current) {
+      const chars = textBlockRef.current.querySelectorAll(".char");
+      console.log(chars);
       gsap.set(chars, { y: 100, opacity: 0 });
 
       gsap.to(chars, {
         y: 0,
         opacity: 1,
-        stagger: 0.005,
+        stagger: 0.07,
         ease: "power3.out",
         scrollTrigger: {
-          trigger: aboutSection.current,
-          start: "top 80%",
+          trigger: textBlockRef.current,
+          start: "top 100%",
           end: "bottom 20%",
           toggleActions: "play none none reverse",
+          onEnter: () => console.log("ScrollTrigger: Entered the trigger area"),
+          onLeave: () => console.log("ScrollTrigger: Left the trigger area"),
         },
       });
     }
@@ -40,8 +45,14 @@ const AboutText: React.FC<AboutTextProps> = ({ aboutSection }) => {
   };
 
   return (
-    <div className="lg:max-w-[90rem] lg:mx-auto p-9" ref={aboutSection}>
-      <p className=" lg:text-3xl/10 text-2xl text-gray-400 lg:w-[60rem]">
+    <div
+      className="lg:max-w-[90rem] lg:mx-auto p-9 about-text"
+      ref={aboutSection}
+    >
+      <p
+        className=" lg:text-3xl/10 text-2xl text-gray-400 lg:w-[60rem]"
+        ref={textBlockRef}
+      >
         {splitTextIntoChars(
           "I’m a front-end developer with a focus on creating intuitive and visually engaging digital experiences. I specialize in building responsive and dynamic websites that blend performance with aesthetics."
         )}

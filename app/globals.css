@@ -70,6 +70,12 @@ canvas {
 .willchange {
   will-change: transform;
 }
+.hover-white {
+  color: white !important;
+}
+a {
+  transition: color 0.3s ease-in-out; /* Ensures all links transition smoothly */
+}
 .svg-wraper {
   will-change: transform;
   transform: translateZ(0);

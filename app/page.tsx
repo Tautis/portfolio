@@ -3,7 +3,7 @@ import Cursor from "@/components/Cursor";
 import Navbar from "@/components/Navbar";
 import CircleText from "@/components/CircleText";
 import { CursorProvider } from "@/context/CursorContext";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Suspense } from "react";
 import Lenis from "lenis";
 import dynamic from "next/dynamic";
 import { Spacer } from "@/components/Spacer";
@@ -15,8 +15,9 @@ import LoadCover from "@/components/LoadCover";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
 import AboutText from "@/components/AboutText";
+import Name from "@/components/Name";
 import Contact from "@/components/Contact";
-const Name = dynamic(() => import("../components/Name"), { ssr: false });
+// const Name = dynamic(() => import("../components/Name"), { ssr: false });
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -59,16 +60,15 @@ export default function Home() {
     }
     requestAnimationFrame(raf);
 
-    let ctx = gsap.matchMedia(); // Create matchMedia context
+    let ctx = gsap.matchMedia();
 
     ctx.add("(max-width: 768px)", () => {
-      // This will only run on screens 768px or smaller (mobile)
       gsap.fromTo(
         textRef.current,
-        { rotate: "0deg", x: 0, transformOrigin: "left top" }, // Start horizontal
+        { rotate: "0deg", x: 0, transformOrigin: "left top" },
         {
-          rotate: "90deg", // Rotate to vertical on scroll
-          x: 0, // Keep it at left-0
+          rotate: "90deg",
+          x: 0,
           ease: "power2.out",
           scrollTrigger: {
             trigger: textRef.current,
@@ -98,7 +98,10 @@ export default function Home() {
           contactSection={contactSection}
         />
         <CircleText />
-        <Name />
+        <Suspense fallback={<div className="h-[200vh] ">Loading...</div>}>
+          <Name />
+        </Suspense>
+
         <div className="z-[99998] relative bg-[#111111]">
           <div className="bg-black-500/40 grid mx-auto">
             <Spacer size="80" />

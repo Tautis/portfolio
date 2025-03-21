@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lottie from "lottie-react";
 import animationData2 from "../public/lottie2.json";
 
@@ -13,7 +12,6 @@ const Name: React.FC = () => {
   };
   useEffect(() => {
     if (typeof window !== "undefined") {
-      gsap.registerPlugin(ScrollTrigger);
       const delayTime = 2.4;
       const ctx = gsap.context(() => {
         gsap.to("svg", {
@@ -59,7 +57,6 @@ const Name: React.FC = () => {
       });
 
       return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         ctx.revert();
         gsap.set(".svg-wraper", { clearProps: "all" });
       };
