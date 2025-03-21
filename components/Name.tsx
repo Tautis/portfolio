@@ -114,7 +114,9 @@ const Name: React.FC = () => {
               ].map((x, i) => (
                 <rect
                   key={i}
-                  ref={(el) => (rectRefs.current[i] = el)}
+                  ref={(el) => {
+                    rectRefs.current[i] = el;
+                  }}
                   x={x}
                   y="50"
                   width={i % 2 === 0 ? "75.1" : "80.1"} // Alternating widths
