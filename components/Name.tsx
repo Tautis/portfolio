@@ -11,56 +11,55 @@ const Name: React.FC = () => {
     overflow: "hidden",
   };
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const delayTime = 2.4;
-      const ctx = gsap.context(() => {
-        gsap.to("svg", {
-          visibility: "visible",
-          duration: 0,
+    if (typeof window === "undefined") return;
+    const delayTime = 2.4;
+    const ctx = gsap.context(() => {
+      gsap.to("svg", {
+        visibility: "visible",
+        duration: 0,
+        delay: delayTime,
+      });
+      const rects = document.querySelectorAll<SVGRectElement>(
+        ".absolute.top-4 rect"
+      );
+
+      rects.forEach((rect, index) => {
+        gsap.set(rect, {
+          clipPath: "inset(0% 0 0 0)",
           delay: delayTime,
         });
-        const rects = document.querySelectorAll<SVGRectElement>(
-          ".absolute.top-4 rect"
-        );
-
-        rects.forEach((rect, index) => {
-          gsap.set(rect, {
-            clipPath: "inset(0% 0 0 0)",
-            delay: delayTime,
-          });
-          gsap.to(rect, {
-            clipPath: "inset(100% 0 0 0)",
-            duration: 5,
-            delay: delayTime + index * 0.03,
-            ease: "power4.out",
-          });
-        });
-
-        gsap.to(".svg-wraper", {
-          scale: 130,
-          xPercent: -100,
-          onStart: () => setAnimationState(1),
-          onUpdate: function () {
-            if (this.progress() === 0) {
-              setAnimationState(0);
-              gsap.set(".svg-wraper", { clearProps: "all" });
-            }
-          },
-          scrollTrigger: {
-            trigger: ".scroll-section",
-            start: "+=1",
-            end: "+=600",
-            scrub: 1,
-          },
-          delay: delayTime,
+        gsap.to(rect, {
+          clipPath: "inset(100% 0 0 0)",
+          duration: 5,
+          delay: delayTime + index * 0.03,
+          ease: "power4.out",
         });
       });
 
-      return () => {
-        ctx.revert();
-        gsap.set(".svg-wraper", { clearProps: "all" });
-      };
-    }
+      gsap.to(".svg-wraper", {
+        scale: 130,
+        xPercent: -100,
+        onStart: () => setAnimationState(1),
+        onUpdate: function () {
+          if (this.progress() === 0) {
+            setAnimationState(0);
+            gsap.set(".svg-wraper", { clearProps: "all" });
+          }
+        },
+        scrollTrigger: {
+          trigger: ".scroll-section",
+          start: "+=1",
+          end: "+=600",
+          scrub: 1,
+        },
+        delay: delayTime,
+      });
+    });
+
+    return () => {
+      ctx.revert();
+      gsap.set(".svg-wraper", { clearProps: "all" });
+    };
   }, []);
 
   return (
