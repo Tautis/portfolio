@@ -98,6 +98,7 @@ export default function Home() {
           contactSection={contactSection}
         />
         <CircleText />
+        <Name />
 
         <div className="z-[99998] relative bg-[#111111]">
           <div className="bg-black-500/40 grid mx-auto">
