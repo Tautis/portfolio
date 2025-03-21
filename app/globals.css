@@ -73,6 +73,9 @@ canvas {
 .hover-white {
   color: white !important;
 }
+.hover-gray {
+  color: gray !important;
+}
 a {
   transition: color 0.3s ease-in-out; /* Ensures all links transition smoothly */
 }

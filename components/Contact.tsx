@@ -32,14 +32,11 @@ const Contact: React.FC<Props> = ({ contactSection }) => {
     const slash2 = document.getElementById("slash2");
     const anchor = e.target as HTMLAnchorElement;
     if (anchor.id === "ig") {
-      slash1?.classList.add("hover-white");
+      slash2?.classList.add("hover-gray");
     }
-    if (anchor.id === "lk") {
-      slash1?.classList.add("hover-white");
-      slash2?.classList.add("hover-white");
-    }
+
     if (anchor.id === "gh") {
-      slash2?.classList.add("hover-white");
+      slash1?.classList.add("hover-gray");
     }
     anchor.classList.add("hover-white");
   }
@@ -49,20 +46,12 @@ const Contact: React.FC<Props> = ({ contactSection }) => {
     const slash2 = document.getElementById("slash2");
     const anchor = e.target as HTMLAnchorElement;
     anchor.classList.remove("hover-white");
-    if (anchor.id === "ig") {
-      slash1?.classList.remove("hover-white");
-    }
-    if (anchor.id === "lk") {
-      slash1?.classList.remove("hover-white");
-      slash2?.classList.remove("hover-white");
-    }
-    if (anchor.id === "gh") {
-      slash2?.classList.remove("hover-white");
-    }
+    slash1?.classList.remove("hover-gray");
+    slash2?.classList.remove("hover-gray");
   }
   return (
     <div
-      className="relative z-[999] flex flex-col items-center justify-center h-[100vh]  bg-[#111111]"
+      className="relative z-[999] flex flex-col items-center justify-center lg:h-[100vh] h-[60vh]  bg-[#111111]"
       onMouseEnter={() => setIsOverContact(true)}
       onMouseLeave={() => setIsOverContact(false)}
     >
@@ -74,7 +63,7 @@ const Contact: React.FC<Props> = ({ contactSection }) => {
           INTERESTED IN{"\n"}WORKING{"\n"}TOGETHER?
         </h1>
       </div>
-      <div className="z-10 absolute lg:bottom-40 bottom-64">
+      <div className="z-10 absolute lg:bottom-40 bottom-24">
         <a href="mailto:tautvydas.jankauskas123@gmail.com?subject=Hello There!">
           <CustomButton
             text="DROP ME AN EMAIL !"
@@ -86,10 +75,11 @@ const Contact: React.FC<Props> = ({ contactSection }) => {
 
       <div className="absolute inset-0 z-0">{isDesktop && <SmokeEffect />}</div>
       <div className="absolute text-white bottom-6">
-        <div className="flex gap-7 font-bold text-sm group">
+        <div className="flex items-center font-bold group">
           <a
             className="text-white hover:text-white group-hover:text-gray-500"
             href="https://www.instagram.com/"
+            target="_blank"
             ref={instagram}
             onMouseOver={(e) => handleHoverOtherLinks(e)}
             onMouseOut={(e) => handleHoverOutLinks(e)}
@@ -97,10 +87,13 @@ const Contact: React.FC<Props> = ({ contactSection }) => {
           >
             INSTAGRAM
           </a>
-          <a id="slash1">/</a>
+          <span className="mx-2" id="slash1">
+            /
+          </span>
           <a
             ref={linkedin}
             href="https://www.linkedin.com/in/tautvydas-jankauskas-99b951197/"
+            target="_blank"
             onMouseOver={(e) => handleHoverOtherLinks(e)}
             onMouseOut={(e) => handleHoverOutLinks(e)}
             className="text-white hover:text-white group-hover:text-gray-500"
@@ -108,10 +101,13 @@ const Contact: React.FC<Props> = ({ contactSection }) => {
           >
             LINKEDIN
           </a>
-          <a id="slash2">/</a>
+          <span className="mx-2" id="slash2">
+            /
+          </span>
           <a
             ref={github}
             href="https://github.com/Tautis"
+            target="_blank"
             onMouseOver={(e) => handleHoverOtherLinks(e)}
             onMouseOut={(e) => handleHoverOutLinks(e)}
             className="text-white hover:text-white group-hover:text-gray-500"
