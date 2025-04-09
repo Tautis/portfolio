@@ -49,7 +49,7 @@ const Card = ({
           top: `calc(-5vh + ${i * 25}px)`,
         }}
       >
-        <div className="flex justify-around items-center h-full bg-[#181818]/90 opacity-0 hover:opacity-100 transition-opacity duration-500">
+        <div className="flex justify-around items-center h-full bg-[#181818]/90 opacity-0 lg:hover:opacity-100 focus:opacity-100 transition-opacity duration-500">
           <Link href={github} target="_blank">
             <div className="border-white-500 border-[1px] rounded-xl py-40 hover:scale-110 transition-transform duration-500">
               <div className="justify-items-center">
