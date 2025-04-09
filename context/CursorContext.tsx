@@ -1,7 +1,6 @@
 "use client";
 import React, { createContext, useContext, useState } from "react";
 
-// Define the shape of the context state
 interface CursorContextType {
   cursorSize: { width: number; height: number };
   setCursorSize: React.Dispatch<
@@ -13,10 +12,8 @@ interface CursorContextType {
   setCursorOffset: React.Dispatch<React.SetStateAction<number>>;
 }
 
-// Create the context with default values
 const CursorContext = createContext<CursorContextType | undefined>(undefined);
 
-// Custom hook to access the context
 export const useCursorContext = () => {
   const context = useContext(CursorContext);
   if (!context) {
@@ -25,12 +22,10 @@ export const useCursorContext = () => {
   return context;
 };
 
-// Define the props for the CursorProvider
 interface CursorProviderProps {
-  children: React.ReactNode; // Define children prop
+  children: React.ReactNode;
 }
 
-// CursorProvider to manage and share the cursor size state
 export const CursorProvider: React.FC<CursorProviderProps> = ({ children }) => {
   const [cursorSize, setCursorSize] = useState({ width: 20, height: 20 });
   const [isOverContact, setIsOverContact] = useState(false);

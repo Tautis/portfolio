@@ -13,7 +13,6 @@ const Cursor: React.FC = () => {
     let animationFrameId: number;
 
     const updateMousePosition = (ev: MouseEvent) => {
-      // Use requestAnimationFrame to limit re-renders
       animationFrameId = requestAnimationFrame(() => {
         setMousePosition({ x: ev.clientX - 10, y: ev.clientY - 10 });
       });

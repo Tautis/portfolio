@@ -27,35 +27,32 @@ const LoadCover: React.FC = () => {
     useDisableScroll(true);
 
     const timeline = gsap.timeline();
-    // Fade out MorphingText right before the divs start moving
     timeline.to(".morphing-text", {
       opacity: 0,
-      duration: 0.5, // Quick fade out
+      duration: 0.5,
       ease: "power1.out",
       delay: 2,
     });
 
-    // GSAP animation to move the divs up and fade them out
     timeline.to(
       ".div",
       {
-        y: "-100vh", // Move each div up by the full viewport height
-        opacity: 0, // Fade out each div
-        duration: 1, // Duration of the animation
-        stagger: 0.3, // Delay between each div's animation (0.3s drag)
+        y: "-100vh",
+        opacity: 0,
+        duration: 1,
+        stagger: 0.3,
         ease: "power2.out",
-        delay: 1, // Easing for a smooth effect
+        delay: 1,
       },
-      "-=1.5" // Start 0.3s after the MorphingText fade-out begins
+      "-=1.5"
     );
 
-    // Optionally, hide the cover after all animations complete
     timeline.to(".cover", { opacity: 0, duration: 1, display: "none" });
     timeline.add(() => {
       useDisableScroll(false);
     }, "-=2");
     return () => {
-      timeline.kill(); // Proper cleanup to stop GSAP animations
+      timeline.kill();
     };
   }, []);
 

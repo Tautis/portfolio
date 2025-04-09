@@ -12,7 +12,6 @@ const Name: React.FC = () => {
   const style = {
     overflow: "hidden",
   };
-  const wrapperRef = useRef<HTMLDivElement>(null);
   const rectRefs = useRef<(SVGRectElement | null)[]>([]);
 
   useEffect(() => {
@@ -27,7 +26,7 @@ const Name: React.FC = () => {
       });
 
       rectRefs.current.forEach((rect, index) => {
-        if (!rect) return; // Ensure ref is valid
+        if (!rect) return;
         gsap.set(rect, {
           clipPath: "inset(0% 0 0 0)",
           delay: delayTime,

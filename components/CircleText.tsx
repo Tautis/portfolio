@@ -1,5 +1,3 @@
-"use client";
-import { useCursorContext } from "@/context/CursorContext";
 import useScrollDirections from "../hooks/useScrollDirections";
 
 const CircleText: React.FC = () => {

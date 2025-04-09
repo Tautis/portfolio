@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 
 const MorphingText = () => {
-  // List of SVGs
   const svgs = [
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -138,22 +137,18 @@ const MorphingText = () => {
     </svg>,
   ];
 
-  // State to track the current SVG index
   const [currentSvg, setCurrentSvg] = useState(0);
 
   useEffect(() => {
-    // Change SVG every 0.1 second
     const interval = setInterval(() => {
-      setCurrentSvg((prevSvg) => (prevSvg + 1) % svgs.length); // Loop back to the start after 10 SVGs
-    }, 200); // 100ms = 0.1 seconds
+      setCurrentSvg((prevSvg) => (prevSvg + 1) % svgs.length);
+    }, 200);
 
-    // Clear the interval when the component is unmounted
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="flex justify-center items-center">
-      {/* Display the current SVG */}
       <div className="w-20 h-20">{svgs[currentSvg]}</div>
     </div>
   );
