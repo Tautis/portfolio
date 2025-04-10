@@ -38,7 +38,7 @@ function CustomButton({
   };
   return (
     <button
-      className={`relative rounded-3xl overflow-hidden group transition-all duration-300 ${colorClasses[bgColor]} ${sizeClasses[size]}`}
+      className={`relative rounded-3xl overflow-hidden bg-[#303030] group transition-all duration-300 ${colorClasses[bgColor]} ${sizeClasses[size]}`}
     >
       <div className="absolute top-3.5 left-4 w-5 h-5 bg-blue-300 rounded-full transition-all duration-300 group-hover:w-full group-hover:h-full group-hover:delay-100 group-hover:left-0 group-hover:top-0"></div>
       <span className="relative z-10 px-8 group-hover:px-10 transition-all duration-300 font-bold">

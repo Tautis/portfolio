@@ -87,7 +87,7 @@ export default function HomeAnimation() {
             <div className="" ref={projectsSection}>
               <p
                 ref={textRef}
-                className="lg:[writing-mode:vertical-lr] inline-block sticky left-0 top-96 tracking-[.5rem] ml-10 mb-0 text-white"
+                className="lg:[writing-mode:vertical-lr] inline-block sticky left-0 top-[40vh] tracking-[.5rem] ml-10 mb-0 text-white"
               >
                 RECENT WORK
               </p>
