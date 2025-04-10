@@ -63,7 +63,7 @@ const Contact: React.FC<Props> = ({ contactSection }) => {
           INTERESTED IN{"\n"}WORKING{"\n"}TOGETHER?
         </h1>
       </div>
-      <div className="z-10 absolute lg:bottom-[10vh] bottom-[20vh]">
+      <div className="z-10 absolute lg:bottom-[15vh] bottom-[20vh]">
         <a href="mailto:tautvydas.jankauskas123@gmail.com?subject=Hello There!">
           <CustomButton
             text="DROP ME AN EMAIL !"
