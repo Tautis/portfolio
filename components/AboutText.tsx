@@ -16,7 +16,6 @@ const AboutText: React.FC<AboutTextProps> = ({ aboutSection }) => {
   useEffect(() => {
     if (typeof window !== "undefined" && textBlockRef.current) {
       const chars = textBlockRef.current.querySelectorAll(".char");
-      console.log(chars);
       gsap.set(chars, { y: 100, opacity: 0 });
 
       gsap.to(chars, {
@@ -29,8 +28,6 @@ const AboutText: React.FC<AboutTextProps> = ({ aboutSection }) => {
           start: "top 100%",
           end: "bottom 20%",
           toggleActions: "play none none reverse",
-          onEnter: () => console.log("ScrollTrigger: Entered the trigger area"),
-          onLeave: () => console.log("ScrollTrigger: Left the trigger area"),
         },
       });
     }
