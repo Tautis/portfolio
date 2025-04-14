@@ -73,7 +73,7 @@ const Contact: React.FC<Props> = ({ contactSection }) => {
         </a>
       </div>
 
-      <div className="absolute inset-0 z-0">{isDesktop && <SmokeEffect />}</div>
+      {/* <div className="absolute inset-0 z-0">{isDesktop && <SmokeEffect />}</div> */}
       <div className="absolute text-white bottom-6">
         <div className="flex items-center font-bold group">
           <a
