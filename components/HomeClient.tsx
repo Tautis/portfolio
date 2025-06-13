@@ -5,21 +5,20 @@ import Lenis from "lenis";
 import { useScroll } from "framer-motion";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
-import Cursor from "@/components/ui/Cursor.jsx";
+import Cursor from "@/components/ui/Cursor";
 import { CursorProvider } from "@/context/CursorContext";
 import LoadCover from "@/components/LoadCover";
-import Navbar from "@/components/layout/Navbar.jsx";
+import Navbar from "@/components/layout/Navbar";
 import CircleText from "@/components/CircleText";
 import Name from "@/components/Name";
 import AboutText from "@/components/AboutText";
-import Contact from "@/components/layout/Contact.jsx";
+import Contact from "@/components/layout/Contact";
 import Card from "@/components/cards";
 import { Spacer } from "@/components/Spacer";
-import { projects } from "../public/data.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function HomeAnimation() {
+export default function HomeClient({ projects }: { projects: any[] }) {
   const projectsSection = useRef(null);
   const aboutSection = useRef(null);
   const contactSection = useRef(null);

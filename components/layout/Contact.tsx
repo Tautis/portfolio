@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import CustomButton, { ButtonColor, ButtonSize } from "./CustomButton";
-import SmokeEffect from "@/components/WebGLCanvas";
+import CustomButton, { ButtonColor, ButtonSize } from "../ui/CustomButton";
+// import SmokeEffect from "@/components/WebGLCanvas";
 import { useCursorContext } from "@/context/CursorContext";
 
 interface Props {
