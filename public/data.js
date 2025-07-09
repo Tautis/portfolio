@@ -15,19 +15,15 @@ export const projects = [
   },
 
   {
-    title: "Clément Chapillon",
+    title: "CryptoDash",
 
-    description:
-      "This is a story on the border between reality and imaginary, about the contradictory feelings that the insularity of a rocky, arid, and wild territory provokes”—so French photographer Clément Chapillon describes his latest highly captivating project Les rochers fauves (French for ‘The tawny rocks’).",
+    github: "https://github.com/Tautis/CryptoDashboard",
 
-    src: "tree.jpg",
-    github: "https://github.com/Tautis/Project-RobertBurgel",
-
-    link: "https://www.ignant.com/2022/09/30/clement-chapillon-questions-geographical-and-mental-isolation-with-les-rochers-fauves/",
+    link: "",
 
     color: "#977F6D",
 
-    image: "/images/site2.jpg",
+    image: "/images/site2.png",
   },
 
   {
@@ -38,41 +34,41 @@ export const projects = [
 
     src: "water.jpg",
 
-    github: "https://github.com/Tautis/Project-RobertBurgel",
-    link: "https://www.ignant.com/2023/10/28/capturing-balis-many-faces-zissou-documents-the-sacred-and-the-mundane-of-a-fragile-island/",
+    github: "",
+    link: "",
 
     color: "#C2491D",
 
-    image: "/images/site3.jpg",
+    image: "/images/inprogress.jpg",
   },
   {
     title: "Zissou",
-    github: "https://github.com/Tautis/Project-RobertBurgel",
+    github: "",
 
     description:
       "Though he views photography as a medium for storytelling, Zissou’s images don’t insist on a narrative. Both crisp and ethereal, they’re encoded with an ambiguity—a certain tension—that lets the viewer find their own story within them.",
 
     src: "water.jpg",
 
-    link: "https://www.ignant.com/2023/10/28/capturing-balis-many-faces-zissou-documents-the-sacred-and-the-mundane-of-a-fragile-island/",
+    link: "",
 
     color: "#C2491D",
 
-    image: "/images/site4.jpg",
+    image: "/images/inprogress.jpg",
   },
   {
     title: "Zissou",
 
-    github: "https://github.com/Tautis/Project-RobertBurgel",
+    github: "",
     description:
       "Though he views photography as a medium for storytelling, Zissou’s images don’t insist on a narrative. Both crisp and ethereal, they’re encoded with an ambiguity—a certain tension—that lets the viewer find their own story within them.",
 
     src: "water.jpg",
 
-    link: "https://www.ignant.com/2023/10/28/capturing-balis-many-faces-zissou-documents-the-sacred-and-the-mundane-of-a-fragile-island/",
+    link: "",
 
     color: "#C2491D",
 
-    image: "/images/site5.jpg",
+    image: "/images/inprogress.jpg",
   },
 ];
